@@ -13,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
+  bool _isHovered = false;
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _aboutMeKey = GlobalKey();
   final GlobalKey _projectKey = GlobalKey();
@@ -373,6 +374,73 @@ class _HomePageState extends State<HomePage>
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      MouseRegion(
+                        onHover: (event) {
+                          setState(() {
+                            _isHovered = true;
+                          });
+                        },
+                        onExit: (event) => setState(() => _isHovered = false),
+                        child: TweenAnimationBuilder(
+                          duration: Duration(milliseconds: 200),
+                          tween: Tween(begin: 1.0, end: _isHovered ? 1.1 : 1.0),
+                          curve: Curves.bounceInOut,
+                          builder: (context, scale, child) {
+                            return Transform.scale(
+                              scale: scale,
+                              child: child,
+                            );
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 20),
+                            width: MediaQuery.of(context).size.width * 0.35,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.blue[100],
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.github,
+                                      size: 50,
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Text('GitHub',
+                                        style: GoogleFonts.jua(fontSize: 40)),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  'https://github.com',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                Text(
+                                  '소스코드 저장공간입니다.',
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     ],
                   ),
                 ),
