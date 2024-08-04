@@ -16,6 +16,8 @@ class _HomePageState extends State<HomePage>
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _aboutMeKey = GlobalKey();
   final GlobalKey _projectKey = GlobalKey();
+  final GlobalKey _skillsKey = GlobalKey();
+  final GlobalKey _archiveKey = GlobalKey();
 
   @override
   void dispose() {
@@ -118,7 +120,14 @@ class _HomePageState extends State<HomePage>
                         height: 40,
                       ),
                       InkWell(
-                        onTap: _scrollToAboutMe,
+                        onTap: () {
+                          Scrollable.ensureVisible(
+                            _aboutMeKey.currentContext!,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.easeInOut,
+                            alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                          );
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.blue[700],
@@ -152,7 +161,14 @@ class _HomePageState extends State<HomePage>
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           InkWell(
-                            onTap: _scrollToAboutMe,
+                            onTap: () {
+                              Scrollable.ensureVisible(
+                                _aboutMeKey.currentContext!,
+                                duration: Duration(seconds: 1),
+                                curve: Curves.easeInOut,
+                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                              );
+                            },
                             child: FaIcon(
                               FontAwesomeIcons.link,
                               size: 40,
@@ -279,6 +295,90 @@ class _HomePageState extends State<HomePage>
               ),
               ResponsiveRowColumnItem(
                 child: Container(
+                  key: _skillsKey,
+                  margin: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Scrollable.ensureVisible(
+                                _skillsKey.currentContext!,
+                                duration: Duration(seconds: 1),
+                                curve: Curves.easeInOut,
+                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                              );
+                            },
+                            child: FaIcon(
+                              FontAwesomeIcons.link,
+                              size: 40,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            'Skills',
+                            style: GoogleFonts.jua(
+                              fontSize: 45,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ResponsiveRowColumnItem(
+                child: Container(
+                  key: _archiveKey,
+                  margin: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Scrollable.ensureVisible(
+                                _archiveKey.currentContext!,
+                                duration: Duration(seconds: 1),
+                                curve: Curves.easeInOut,
+                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                              );
+                            },
+                            child: FaIcon(
+                              FontAwesomeIcons.link,
+                              size: 40,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            'Archiving',
+                            style: GoogleFonts.jua(
+                              fontSize: 45,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              ResponsiveRowColumnItem(
+                child: Container(
                   key: _projectKey,
                   margin: EdgeInsets.only(top: 30),
                   padding: EdgeInsets.symmetric(
@@ -295,6 +395,7 @@ class _HomePageState extends State<HomePage>
                                 _projectKey.currentContext!,
                                 duration: Duration(seconds: 1),
                                 curve: Curves.easeInOut,
+                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
                               );
                             },
                             child: FaIcon(
@@ -311,26 +412,9 @@ class _HomePageState extends State<HomePage>
                               fontSize: 45,
                               fontWeight: FontWeight.bold,
                             ),
-                            // style: TextStyle(
-                            //     fontSize: 45, fontWeight: FontWeight.bold),
                           ),
-                          Container(
-                            color: Colors.red,
-                            width: 200,
-                            height: 499,
-                          )
                         ],
                       ),
-                      Container(
-                        color: Colors.red,
-                        width: 200,
-                        height: 499,
-                      ),
-                      Container(
-                        color: Colors.red,
-                        width: 200,
-                        height: 499,
-                      )
                     ],
                   ),
                 ),
