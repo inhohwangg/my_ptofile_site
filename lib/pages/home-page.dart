@@ -13,7 +13,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
-  bool _isHovered = false;
+  bool _isGitHubHovered = false;
+  bool _isTistoryHovered = false;
   final ScrollController _scrollController = ScrollController();
   final GlobalKey _aboutMeKey = GlobalKey();
   final GlobalKey _projectKey = GlobalKey();
@@ -150,7 +151,119 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               ResponsiveRowColumnItem(
+                child: aboutMe()
+              ),
+              ResponsiveRowColumnItem(
                 child: Container(
+                  key: _skillsKey,
+                  margin: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Scrollable.ensureVisible(
+                                _skillsKey.currentContext!,
+                                duration: Duration(seconds: 1),
+                                curve: Curves.easeInOut,
+                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                              );
+                            },
+                            child: FaIcon(
+                              FontAwesomeIcons.link,
+                              size: 40,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            'Skills',
+                            style: GoogleFonts.jua(
+                              fontSize: 45,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            children: [
+                              Text('data')
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text('data')
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              ResponsiveRowColumnItem(
+                child: archive()
+              ),
+              ResponsiveRowColumnItem(
+                child: Container(
+                  key: _projectKey,
+                  margin: EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              Scrollable.ensureVisible(
+                                _projectKey.currentContext!,
+                                duration: Duration(seconds: 1),
+                                curve: Curves.easeInOut,
+                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                              );
+                            },
+                            child: FaIcon(
+                              FontAwesomeIcons.link,
+                              size: 40,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            'Projects',
+                            style: GoogleFonts.jua(
+                              fontSize: 45,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  aboutMe() {
+    return Container(
                   key: _aboutMeKey,
                   margin: EdgeInsets.only(top: 30),
                   padding: EdgeInsets.symmetric(
@@ -292,56 +405,17 @@ class _HomePageState extends State<HomePage>
                       ),
                     ],
                   ),
-                ),
-              ),
-              ResponsiveRowColumnItem(
-                child: Container(
-                  key: _skillsKey,
-                  margin: EdgeInsets.only(top: 30),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Scrollable.ensureVisible(
-                                _skillsKey.currentContext!,
-                                duration: Duration(seconds: 1),
-                                curve: Curves.easeInOut,
-                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
-                              );
-                            },
-                            child: FaIcon(
-                              FontAwesomeIcons.link,
-                              size: 40,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            'Skills',
-                            style: GoogleFonts.jua(
-                              fontSize: 45,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              ResponsiveRowColumnItem(
-                child: Container(
+                );
+  }
+
+  archive() {
+    return Container(
+                  height: 400,
+                  color: Colors.black,
                   key: _archiveKey,
                   margin: EdgeInsets.only(top: 30),
                   padding: EdgeInsets.symmetric(
-                    vertical: 10,
+                    vertical: 20,
                   ),
                   child: Column(
                     children: [
@@ -360,6 +434,7 @@ class _HomePageState extends State<HomePage>
                             child: FaIcon(
                               FontAwesomeIcons.link,
                               size: 40,
+                              color: Colors.white,
                             ),
                           ),
                           SizedBox(
@@ -369,6 +444,7 @@ class _HomePageState extends State<HomePage>
                             'Archiving',
                             style: GoogleFonts.jua(
                               fontSize: 45,
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -377,120 +453,151 @@ class _HomePageState extends State<HomePage>
                       SizedBox(
                         height: 40,
                       ),
-                      MouseRegion(
-                        onHover: (event) {
-                          setState(() {
-                            _isHovered = true;
-                          });
-                        },
-                        onExit: (event) => setState(() => _isHovered = false),
-                        child: TweenAnimationBuilder(
-                          duration: Duration(milliseconds: 200),
-                          tween: Tween(begin: 1.0, end: _isHovered ? 1.1 : 1.0),
-                          curve: Curves.bounceInOut,
-                          builder: (context, scale, child) {
-                            return Transform.scale(
-                              scale: scale,
-                              child: child,
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 20),
-                            width: MediaQuery.of(context).size.width * 0.35,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.blue[100],
-                            ),
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    FaIcon(
-                                      FontAwesomeIcons.github,
-                                      size: 50,
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text('GitHub',
-                                        style: GoogleFonts.jua(fontSize: 40)),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  'https://github.com',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                                SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  '소스코드 저장공간입니다.',
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              ResponsiveRowColumnItem(
-                child: Container(
-                  key: _projectKey,
-                  margin: EdgeInsets.only(top: 30),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          InkWell(
-                            onTap: () {
-                              Scrollable.ensureVisible(
-                                _projectKey.currentContext!,
-                                duration: Duration(seconds: 1),
-                                curve: Curves.easeInOut,
-                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
-                              );
+                          MouseRegion(
+                            onHover: (event) {
+                              setState(() {
+                                _isGitHubHovered = true;
+                              });
                             },
-                            child: FaIcon(
-                              FontAwesomeIcons.link,
-                              size: 40,
+                            onExit: (event) =>
+                                setState(() => _isGitHubHovered = false),
+                            child: TweenAnimationBuilder(
+                              duration: Duration(milliseconds: 200),
+                              tween: Tween(
+                                  begin: 1.0,
+                                  end: _isGitHubHovered ? 1.1 : 1.0),
+                              curve: Curves.bounceInOut,
+                              builder: (context, scale, child) {
+                                return Transform.scale(
+                                  scale: scale,
+                                  child: child,
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        FaIcon(
+                                          FontAwesomeIcons.github,
+                                          size: 50,
+                                        ),
+                                        SizedBox(
+                                          width: 15,
+                                        ),
+                                        Text('GitHub',
+                                            style:
+                                                GoogleFonts.jua(fontSize: 40)),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      'https://github.com',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      '소스코드를 저장하는 공간입니다.',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                           SizedBox(
-                            width: 20,
+                            width: 50,
                           ),
-                          Text(
-                            'Projects',
-                            style: GoogleFonts.jua(
-                              fontSize: 45,
-                              fontWeight: FontWeight.bold,
+                          MouseRegion(
+                            onHover: (event) {
+                              setState(() {
+                                _isTistoryHovered = true;
+                              });
+                            },
+                            onExit: (event) =>
+                                setState(() => _isTistoryHovered = false),
+                            child: TweenAnimationBuilder(
+                              duration: Duration(milliseconds: 200),
+                              tween: Tween(
+                                  begin: 1.0,
+                                  end: _isTistoryHovered ? 1.1 : 1.0),
+                              curve: Curves.bounceInOut,
+                              builder: (context, scale, child) {
+                                return Transform.scale(
+                                  scale: scale,
+                                  child: child,
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 20, vertical: 20),
+                                width: MediaQuery.of(context).size.width * 0.35,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white,
+                                ),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Image.asset('assets/icons/tistory.png',width: 50,height: 50,color: Color(0xFFFF5722),),
+                                        SizedBox(
+                                          width: 15,
+                                        ),
+                                        Text('TISTORY',
+                                            style:
+                                                GoogleFonts.jua(fontSize: 40)),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      'https://tistory.com',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(
+                                      height: 15,
+                                    ),
+                                    Text(
+                                      '공부한 내용을 기록하는 공간입니다.',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+                );
   }
 }
