@@ -43,30 +43,30 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Container(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Text(
-              '황인호 포트폴리오',
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
-            ),
-          ),
-          actions: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: Colors.grey[300]!)),
-              margin: EdgeInsets.only(right: 10, top: 5),
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.menu,
-                  size: 30,
-                ),
-              ),
-            ),
-          ],
-        ),
+        // appBar: AppBar(
+        //   title: Container(
+        //     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        //     child: Text(
+        //       '황인호 포트폴리오',
+        //       style: TextStyle(fontWeight: FontWeight.w700, fontSize: 25),
+        //     ),
+        //   ),
+        //   actions: [
+        //     Container(
+        //       padding: EdgeInsets.symmetric(horizontal: 5),
+        //       decoration: BoxDecoration(
+        //           border: Border.all(width: 1, color: Colors.grey[300]!)),
+        //       margin: EdgeInsets.only(right: 10, top: 5),
+        //       child: IconButton(
+        //         onPressed: () {},
+        //         icon: Icon(
+        //           Icons.menu,
+        //           size: 30,
+        //         ),
+        //       ),
+        //     ),
+        //   ],
+        // ),
         body: SingleChildScrollView(
           controller: _scrollController,
           child: ResponsiveRowColumn(
@@ -150,69 +150,11 @@ class _HomePageState extends State<HomePage>
                   ),
                 ),
               ),
+              ResponsiveRowColumnItem(child: aboutMe()),
               ResponsiveRowColumnItem(
-                child: aboutMe()
+                child: skills(),
               ),
-              ResponsiveRowColumnItem(
-                child: Container(
-                  key: _skillsKey,
-                  margin: EdgeInsets.only(top: 30),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Scrollable.ensureVisible(
-                                _skillsKey.currentContext!,
-                                duration: Duration(seconds: 1),
-                                curve: Curves.easeInOut,
-                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
-                              );
-                            },
-                            child: FaIcon(
-                              FontAwesomeIcons.link,
-                              size: 40,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            'Skills',
-                            style: GoogleFonts.jua(
-                              fontSize: 45,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Column(
-                            children: [
-                              Text('data')
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text('data')
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              ResponsiveRowColumnItem(
-                child: archive()
-              ),
+              ResponsiveRowColumnItem(child: archive()),
               ResponsiveRowColumnItem(
                 child: Container(
                   key: _projectKey,
@@ -262,342 +204,550 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  skills() {
+    return Container(
+      color: Colors.amber[200],
+      key: _skillsKey,
+      // margin: EdgeInsets.only(top: 30),
+      padding: EdgeInsets.symmetric(
+        vertical: 30,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  Scrollable.ensureVisible(
+                    _skillsKey.currentContext!,
+                    duration: Duration(seconds: 1),
+                    curve: Curves.easeInOut,
+                    alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                  );
+                },
+                child: FaIcon(
+                  FontAwesomeIcons.link,
+                  size: 40,
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                'Skills',
+                style: GoogleFonts.jua(
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          'OS',
+                          style: GoogleFonts.jua(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset('assets/logo/debian.png',
+                            width: 150, height: 150),
+                        Image.asset('assets/logo/ubuntu.png',
+                            width: 150, height: 150),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Version Control',
+                          style: GoogleFonts.jua(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset('assets/logo/git.png',
+                            width: 150, height: 150),
+                        Image.asset('assets/logo/github.png',
+                            width: 150, height: 150),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Mobile App',
+                          style: GoogleFonts.jua(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset('assets/logo/flutter.png',
+                            width: 150, height: 150),
+                        Image.asset('assets/logo/dart.png',
+                            width: 150, height: 150),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Frontend',
+                          style: GoogleFonts.jua(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset('assets/logo/htmlcssjs.png',
+                            width: 150, height: 150),
+                        // Image.asset('assets/logo/ubuntu.png',width: 150,height: 150),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Backend',
+                          style: GoogleFonts.jua(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset('assets/logo/node.png',
+                            width: 150, height: 150),
+                        Image.asset('assets/logo/pocketbase.png',
+                            width: 150, height: 150),
+                        Image.asset('assets/logo/postgresql.png',
+                            width: 150, height: 150),
+                        Image.asset('assets/logo/mongodb.png',
+                            width: 150, height: 150),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10)),
+                    padding: EdgeInsets.symmetric(horizontal: 60, vertical: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Deployment',
+                          style: GoogleFonts.jua(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset('assets/logo/laptop.png',
+                            width: 150, height: 150),
+                        Image.asset('assets/logo/docker.png',
+                            width: 150, height: 150),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ],
+          )
+        ],
+      ),
+    );
+  }
+
   aboutMe() {
     return Container(
-                  key: _aboutMeKey,
-                  margin: EdgeInsets.only(top: 30),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10,
-                  ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Scrollable.ensureVisible(
-                                _aboutMeKey.currentContext!,
-                                duration: Duration(seconds: 1),
-                                curve: Curves.easeInOut,
-                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
-                              );
-                            },
-                            child: FaIcon(
-                              FontAwesomeIcons.link,
-                              size: 40,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            'About Me',
-                            style: GoogleFonts.jua(
-                              fontSize: 45,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            // style: TextStyle(
-                            //     fontSize: 45, fontWeight: FontWeight.bold),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Flexible(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.person,
-                                  size: 40,
-                                ),
-                                SizedBox(width: 25), // 아이콘과 텍스트 간의 간격
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '이름',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      '황인호',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.grey[700]),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Flexible(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                FaIcon(
-                                  FontAwesomeIcons.at,
-                                  size: 40,
-                                ),
-                                SizedBox(width: 25),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '이메일',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      'sk1440sk@naver.com',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.grey[700]),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          Flexible(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.call,
-                                  size: 40,
-                                ),
-                                SizedBox(width: 25),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '연락처',
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    Text(
-                                      '010-2540-6481',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.grey[700]),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                    ],
-                  ),
-                );
+      key: _aboutMeKey,
+      margin: EdgeInsets.only(top: 30),
+      padding: EdgeInsets.symmetric(
+        vertical: 10,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  Scrollable.ensureVisible(
+                    _aboutMeKey.currentContext!,
+                    duration: Duration(seconds: 1),
+                    curve: Curves.easeInOut,
+                    alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                  );
+                },
+                child: FaIcon(
+                  FontAwesomeIcons.link,
+                  size: 40,
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                'About Me',
+                style: GoogleFonts.jua(
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold,
+                ),
+                // style: TextStyle(
+                //     fontSize: 45, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.person,
+                      size: 40,
+                    ),
+                    SizedBox(width: 25), // 아이콘과 텍스트 간의 간격
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '이름',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          '황인호',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey[700]),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    FaIcon(
+                      FontAwesomeIcons.at,
+                      size: 40,
+                    ),
+                    SizedBox(width: 25),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '이메일',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          'sk1440sk@naver.com',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey[700]),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Flexible(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.call,
+                      size: 40,
+                    ),
+                    SizedBox(width: 25),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '연락처',
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.w600),
+                        ),
+                        Text(
+                          '010-2540-6481',
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.grey[700]),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 25,
+          ),
+        ],
+      ),
+    );
   }
 
   archive() {
     return Container(
-                  height: 400,
-                  color: Colors.black,
-                  key: _archiveKey,
-                  margin: EdgeInsets.only(top: 30),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 20,
+      height: 400,
+      color: Colors.black,
+      key: _archiveKey,
+      // margin: EdgeInsets.only(top: 30),
+      padding: EdgeInsets.symmetric(
+        vertical: 20,
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              InkWell(
+                onTap: () {
+                  Scrollable.ensureVisible(
+                    _archiveKey.currentContext!,
+                    duration: Duration(seconds: 1),
+                    curve: Curves.easeInOut,
+                    alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
+                  );
+                },
+                child: FaIcon(
+                  FontAwesomeIcons.link,
+                  size: 40,
+                  color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              Text(
+                'Archiving',
+                style: GoogleFonts.jua(
+                  fontSize: 45,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 40,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MouseRegion(
+                onHover: (event) {
+                  setState(() {
+                    _isGitHubHovered = true;
+                  });
+                },
+                onExit: (event) => setState(() => _isGitHubHovered = false),
+                child: TweenAnimationBuilder(
+                  duration: Duration(milliseconds: 200),
+                  tween: Tween(begin: 1.0, end: _isGitHubHovered ? 1.1 : 1.0),
+                  curve: Curves.bounceInOut,
+                  builder: (context, scale, child) {
+                    return Transform.scale(
+                      scale: scale,
+                      child: child,
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            FaIcon(
+                              FontAwesomeIcons.github,
+                              size: 50,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text('GitHub',
+                                style: GoogleFonts.jua(fontSize: 40)),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          'https://github.com',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          '소스코드를 저장하는 공간입니다.',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          InkWell(
-                            onTap: () {
-                              Scrollable.ensureVisible(
-                                _archiveKey.currentContext!,
-                                duration: Duration(seconds: 1),
-                                curve: Curves.easeInOut,
-                                alignment: 0.0, // 0.0은 최상단, 1.0은 최하단
-                              );
-                            },
-                            child: FaIcon(
-                              FontAwesomeIcons.link,
-                              size: 40,
-                              color: Colors.white,
+                ),
+              ),
+              SizedBox(
+                width: 50,
+              ),
+              MouseRegion(
+                onHover: (event) {
+                  setState(() {
+                    _isTistoryHovered = true;
+                  });
+                },
+                onExit: (event) => setState(() => _isTistoryHovered = false),
+                child: TweenAnimationBuilder(
+                  duration: Duration(milliseconds: 200),
+                  tween: Tween(begin: 1.0, end: _isTistoryHovered ? 1.1 : 1.0),
+                  curve: Curves.bounceInOut,
+                  builder: (context, scale, child) {
+                    return Transform.scale(
+                      scale: scale,
+                      child: child,
+                    );
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                    width: MediaQuery.of(context).size.width * 0.35,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/icons/tistory.png',
+                              width: 50,
+                              height: 50,
+                              color: Color(0xFFFF5722),
                             ),
-                          ),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            'Archiving',
-                            style: GoogleFonts.jua(
-                              fontSize: 45,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                            SizedBox(
+                              width: 15,
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          MouseRegion(
-                            onHover: (event) {
-                              setState(() {
-                                _isGitHubHovered = true;
-                              });
-                            },
-                            onExit: (event) =>
-                                setState(() => _isGitHubHovered = false),
-                            child: TweenAnimationBuilder(
-                              duration: Duration(milliseconds: 200),
-                              tween: Tween(
-                                  begin: 1.0,
-                                  end: _isGitHubHovered ? 1.1 : 1.0),
-                              curve: Curves.bounceInOut,
-                              builder: (context, scale, child) {
-                                return Transform.scale(
-                                  scale: scale,
-                                  child: child,
-                                );
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        FaIcon(
-                                          FontAwesomeIcons.github,
-                                          size: 50,
-                                        ),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        Text('GitHub',
-                                            style:
-                                                GoogleFonts.jua(fontSize: 40)),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'https://github.com',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      '소스코드를 저장하는 공간입니다.',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 50,
-                          ),
-                          MouseRegion(
-                            onHover: (event) {
-                              setState(() {
-                                _isTistoryHovered = true;
-                              });
-                            },
-                            onExit: (event) =>
-                                setState(() => _isTistoryHovered = false),
-                            child: TweenAnimationBuilder(
-                              duration: Duration(milliseconds: 200),
-                              tween: Tween(
-                                  begin: 1.0,
-                                  end: _isTistoryHovered ? 1.1 : 1.0),
-                              curve: Curves.bounceInOut,
-                              builder: (context, scale, child) {
-                                return Transform.scale(
-                                  scale: scale,
-                                  child: child,
-                                );
-                              },
-                              child: Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 20),
-                                width: MediaQuery.of(context).size.width * 0.35,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.white,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Image.asset('assets/icons/tistory.png',width: 50,height: 50,color: Color(0xFFFF5722),),
-                                        SizedBox(
-                                          width: 15,
-                                        ),
-                                        Text('TISTORY',
-                                            style:
-                                                GoogleFonts.jua(fontSize: 40)),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      'https://tistory.com',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                    SizedBox(
-                                      height: 15,
-                                    ),
-                                    Text(
-                                      '공부한 내용을 기록하는 공간입니다.',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            Text('TISTORY',
+                                style: GoogleFonts.jua(fontSize: 40)),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          'https://tistory.com',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        Text(
+                          '공부한 내용을 기록하는 공간입니다.',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
                   ),
-                );
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
