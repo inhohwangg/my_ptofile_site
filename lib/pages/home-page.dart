@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -157,10 +158,11 @@ class _HomePageState extends State<HomePage>
               ResponsiveRowColumnItem(child: archive()),
               ResponsiveRowColumnItem(
                 child: Container(
+                  color: Colors.blue[400],
                   key: _projectKey,
-                  margin: EdgeInsets.only(top: 30),
+                  // margin: EdgeInsets.only(top: 30),
                   padding: EdgeInsets.symmetric(
-                    vertical: 10,
+                    vertical: 30,
                   ),
                   child: Column(
                     children: [
@@ -179,6 +181,7 @@ class _HomePageState extends State<HomePage>
                             child: FaIcon(
                               FontAwesomeIcons.link,
                               size: 40,
+                              color: Colors.white,
                             ),
                           ),
                           SizedBox(
@@ -187,12 +190,168 @@ class _HomePageState extends State<HomePage>
                           Text(
                             'Projects',
                             style: GoogleFonts.jua(
-                              fontSize: 45,
-                              fontWeight: FontWeight.bold,
-                            ),
+                                fontSize: 45,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
                           ),
                         ],
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                        width: MediaQuery.of(context).size.width * 0.85,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Column(
+                          children: [
+                            Text(
+                              'YouTube 다운로드',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.red),
+                                      width: 300,
+                                      height: 300,
+                                      child: Center(
+                                        child: Text('data'),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Flexible(
+                                  child: Column(
+                                    children: [
+                                      Text(
+                                        '시중에있는 Youtube 음악 다운로드 앱들은 다운로드 후 광고를 시청해야합니다.\n',
+                                        overflow: TextOverflow.visible,
+                                        maxLines: null,
+                                        softWrap: true,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text(
+                                        '광고를 보지않고 듣고싶은 음악이나 동영상을 다운로드받고싶어서 직접 개발하였습니다.',
+                                        overflow: TextOverflow.visible,
+                                        maxLines: null,
+                                        softWrap: true,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      SizedBox(height: 10,),
+                                      Divider(
+                                        color: Colors.grey[500],
+                                      ),
+                                      SizedBox(height: 10,),
+                                      // 주요기능 , GitHub , 패키지
+                                      Row(
+                                        children: [
+                                          Text('주요 기능',style: TextStyle(fontWeight: FontWeight.w700),),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              '선택한 동영상/오디오 링크 추출 , youtube_explode_dart 패키지를 사용하여 동영상 추출, 비디오를 오디오로 전환, 다운로드 퍼센트 표시',
+                                              maxLines: null,
+                                              softWrap: true,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Row(
+                                        children: [
+                                          Text('GitHub',style: TextStyle(fontWeight: FontWeight.w700),),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              'https://github.com',
+                                              maxLines: null,
+                                              softWrap: true,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Row(
+                                        children: [
+                                          Text('Package',style: TextStyle(fontWeight: FontWeight.w700),),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              'youtube_explode_dart,flutter_inappwebview,ffmpeg_kit_flutter_audio,path_provider',
+                                              maxLines: null,
+                                              softWrap: true,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Row(
+                                        children: [
+                                          Text('개발인원',style: TextStyle(fontWeight: FontWeight.w700),),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              '1인 개발',
+                                              maxLines: null,
+                                              softWrap: true,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      SizedBox(height: 20,),
+                                      Row(
+                                        children: [
+                                          Text('개발기간',style: TextStyle(fontWeight: FontWeight.w700),),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Flexible(
+                                            child: Text(
+                                              '2주',
+                                              maxLines: null,
+                                              softWrap: true,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      )
                     ],
                   ),
                 ),
