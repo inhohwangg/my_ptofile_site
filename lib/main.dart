@@ -15,10 +15,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       builder: (context, child) =>
           ResponsiveBreakpoints.builder(child: child!, breakpoints: [
-        Breakpoint(start: 0, end: 450, name: MOBILE),
-        Breakpoint(start: 451, end: 800, name: TABLET),
-        Breakpoint(start: 801, end: 1920, name: DESKTOP),
-        Breakpoint(start: 1921, end: double.infinity, name: '4K'),
+        Breakpoint(start: 0, end: 350, name: MOBILE),
+        Breakpoint(start: 351, end: 600, name: TABLET),
+        Breakpoint(start: 601, end: 1700, name: DESKTOP),
+        Breakpoint(start: 1701, end: double.infinity, name: 'XL'),
       ]),
       theme: ThemeData(fontFamily: 'NanumGothic'),
       debugShowCheckedModeBanner: false,
