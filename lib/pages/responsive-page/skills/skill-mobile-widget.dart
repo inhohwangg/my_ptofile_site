@@ -30,7 +30,7 @@ class SkillMobileWidget extends StatelessWidget {
                     Text(
                       'OS',
                       style: GoogleFonts.jua(
-                        fontSize: 30,
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -66,7 +66,7 @@ class SkillMobileWidget extends StatelessWidget {
                       'Version Control',
                       textAlign: TextAlign.center,
                       style: GoogleFonts.jua(
-                        fontSize: 30,
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -100,7 +100,7 @@ class SkillMobileWidget extends StatelessWidget {
                     Text(
                       'Frontend',
                       style: GoogleFonts.jua(
-                        fontSize: 30,
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -138,9 +138,9 @@ class SkillMobileWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Mobile App',
+                      'Mobile',
                       style: GoogleFonts.jua(
-                        fontSize: 30,
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -174,7 +174,7 @@ class SkillMobileWidget extends StatelessWidget {
                     Text(
                       'Backend',
                       style: GoogleFonts.jua(
-                        fontSize: 30,
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -218,9 +218,11 @@ class SkillMobileWidget extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      'Deployment',
+                      'Deploy',
+                      maxLines: 1,
+                      overflow: TextOverflow.visible,
                       style: GoogleFonts.jua(
-                        fontSize: 30,
+                        fontSize: MediaQuery.of(context).size.width * 0.05,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
