@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_framework.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:video_player/video_player.dart';
 
 import '../controllers/home-page-controller.dart';
 import 'responsive-page/aboutMe/about-mobile-widget.dart';
@@ -29,6 +32,7 @@ class _HomePageState extends State<HomePage>
   final GlobalKey _projectKey = GlobalKey();
   final GlobalKey _skillsKey = GlobalKey();
   final GlobalKey _archiveKey = GlobalKey();
+  late VideoPlayerController videoPlayerController;
 
   @override
   void dispose() {
@@ -53,6 +57,21 @@ class _HomePageState extends State<HomePage>
     // 실시간으로 변경되는 값들
     super.didChangeDependencies();
     controller.webSize.value = MediaQuery.of(context).size.width as int;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+      ),
+      videoPlayerOptions: VideoPlayerOptions(
+        webOptions: VideoPlayerWebOptions(
+          controls: VideoPlayerWebOptionsControls.enabled(),
+        ),
+      ),
+    )..initialize().then((_) => setState(() {}));
   }
 
   @override
@@ -239,13 +258,13 @@ class _HomePageState extends State<HomePage>
                                   children: [
                                     Container(
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.red),
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.black,
+                                      ),
                                       width: 300,
                                       height: 300,
-                                      child: Center(
-                                        child: Text('data'),
+                                      child: VideoPlayer(
+                                        videoPlayerController,
                                       ),
                                     )
                                   ],
@@ -591,46 +610,53 @@ class _HomePageState extends State<HomePage>
                       child: child,
                     );
                   },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    width: MediaQuery.of(context).size.width * 0.35,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FaIcon(
-                              FontAwesomeIcons.github,
-                              size: 50,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text('GitHub',
-                                style: GoogleFonts.jua(fontSize: 40)),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          'https://github.com',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          '소스코드를 저장하는 공간입니다.',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                      ],
+                  child: GestureDetector(
+                    onTap: () async {
+                      await launchUrl(
+                          Uri.parse('https://github.com/inhohwangg'));
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.github,
+                                size: 50,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text('GitHub',
+                                  style: GoogleFonts.jua(fontSize: 30)),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          // Text(
+                          //   'https://github.com/inhohwangg',
+                          //   style: TextStyle(
+                          //       fontSize: 20, fontWeight: FontWeight.w600),
+                          // ),
+                          // SizedBox(
+                          //   height: 15,
+                          // ),
+                          Text(
+                            '소스코드를 저장하는 공간입니다.',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -655,48 +681,57 @@ class _HomePageState extends State<HomePage>
                       child: child,
                     );
                   },
-                  child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    width: MediaQuery.of(context).size.width * 0.35,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/icons/tistory.png',
-                              width: 50,
-                              height: 50,
-                              color: Color(0xFFFF5722),
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text('TISTORY',
-                                style: GoogleFonts.jua(fontSize: 40)),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          'https://tistory.com',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          '공부한 내용을 기록하는 공간입니다.',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w600),
-                        ),
-                      ],
+                  child: GestureDetector(
+                    onTap: () async {
+                      await launchUrl(
+                          Uri.parse('https://inho-dev.tistory.com/'));
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                      width: MediaQuery.of(context).size.width * 0.35,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/icons/tistory.png',
+                                width: 50,
+                                height: 50,
+                                color: Color(0xFFFF5722),
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Text('TISTORY',
+                                  style: GoogleFonts.jua(
+                                    fontSize: 23,
+                                  )),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15,
+                          ),
+                          // Text(
+                          //   'https://inho-dev.tistory.com/',
+                          //   style: TextStyle(
+                          //       fontSize: 20, fontWeight: FontWeight.w600),
+                          // ),
+                          // SizedBox(
+                          //   height: 15,
+                          // ),
+                          Text(
+                            '공부내용을 기록하는 공간입니다.',
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gap/gap.dart';
 import 'package:my_profile_site/util/g_size.dart';
 
 class AboutMobileWidget extends StatelessWidget {
@@ -13,6 +14,7 @@ class AboutMobileWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
                 width: 70.w,
@@ -51,6 +53,7 @@ class AboutMobileWidget extends StatelessWidget {
                   ],
                 ),
               ),
+              Gap(20),
               SizedBox(
                 width: 70.w,
                 child: Row(
@@ -88,6 +91,7 @@ class AboutMobileWidget extends StatelessWidget {
                   ],
                 ),
               ),
+              Gap(20),
               SizedBox(
                 width: 70.w,
                 child: Row(
